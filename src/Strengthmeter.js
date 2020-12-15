@@ -1,5 +1,4 @@
 import React from 'react'
-import {ProgressBar} from 'react-bootstrap'
 import zxcvbn from 'zxcvbn';
 
 export default function Strengthmeter({password}) {

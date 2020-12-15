@@ -1,11 +1,24 @@
 import React from 'react';
-import { Container, Form, Button, Card, Jumbotron, ProgressBar } from 'react-bootstrap';
+import { Container, Form, Button, Card, Jumbotron} from 'react-bootstrap';
 import Strengthmeter from './Strengthmeter';
 import {useState} from 'react';
 
 function App() {
-  const[password,setPassword] = useState('');
-  
+  const[password,setpassword] = useState('');
+  const[confpassword,setconfpassword] = useState('');
+  const[iserror,setiserror] = useState('');
+  console.log(password);
+  console.log(confpassword);
+
+  const Checkvalidation = (e) =>{
+    setconfpassword(e.target.value);
+    if(password !== e.target.value ){ {/*Here when we try to put confpassword in condition it wont work because it takes first value as empty string*/}
+      setiserror("Passwords do not match");
+    }else{
+      setiserror("");
+  }
+  };
+
   return (
     <Container>
       <Jumbotron className="m-3">
@@ -31,7 +44,7 @@ function App() {
               <Form.Control 
                 type="password"  
                 placeholder="Password" 
-                onChange = {(e) =>setPassword(e.target.value)}
+                onChange = {(e) =>setpassword(e.target.value)}
               />
             </Form.Group>
             <Strengthmeter password = {password}/>
@@ -40,9 +53,11 @@ function App() {
               <Form.Label>ConfirmPassword</Form.Label>
               <Form.Control 
                 type="password"  
-                placeholder="Password" 
+                placeholder="confirm Password" 
+                onChange = {(e) =>Checkvalidation(e)}
               />
             </Form.Group>
+            <div className = 'text text-danger'>{iserror}</div>
 
             <Form.Group controlId="formBasicCheckbox">
               <Form.Check 
